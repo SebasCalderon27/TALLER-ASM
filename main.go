@@ -1,45 +1,39 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 func main() {
-	// Array bidimensional [6][4]float64
-	notas := [6][4]float64{
-		{8.5, 7.0, 9.0, 6.5},
-		{9.0, 8.0, 7.5, 8.5},
-		{6.0, 5.5, 7.0, 6.0},
-		{10.0, 9.5, 9.0, 10.0},
-		{7.0, 6.5, 8.0, 7.5},
-		{5.5, 6.0, 5.0, 6.5},
+	NOTASCURSO := [6][4]float64{
+		{8.2, 9.6, 7.6, 10},
+		{6.6, 5.9, 8.5, 7.2},
+		{9.2, 9.5, 8.7, 10},
+		{5.4, 6.7, 5.9, 4.8},
+		{7.2, 8.4, 6.9, 7.2},
+		{10, 9.4, 9.2, 10},
 	}
 
-	var promedioGeneral float64
-	fmt.Println("=== Análisis de Notas ===")
+	var TOTALCURSO float64
 
-	for i := 0; i < len(notas); i++ {
-		sliceNotas := notas[i][:] // Slice de las notas del estudiante
-		var suma float64
-		mayor := sliceNotas[0]
-		menor := sliceNotas[0]
+	for i := 0; i < 6; i++ {
+		SUMA := 0.0
+		MAYORNOTA := NOTASCURSO[i][0]
+		MENORNOTA := NOTASCURSO[i][0]
 
-		for _, n := range sliceNotas {
-			suma += n
-			if n > mayor {
-				mayor = n
+		for j := 0; j < 4; j++ {
+			if NOTASCURSO[i][j] > MAYORNOTA {
+				MAYORNOTA = NOTASCURSO[i][j]
 			}
-			if n < menor {
-				menor = n
+			if NOTASCURSO[i][j] < MENORNOTA {
+				MENORNOTA = NOTASCURSO[i][j]
 			}
+			SUMA += NOTASCURSO[i][j]
 		}
 
-		promedio := suma / float64(len(sliceNotas))
-		promedioGeneral += promedio
-
-		fmt.Printf("Estudiante %d → Promedio: %.2f | Mayor: %.2f | Menor: %.2f\n", i+1, promedio, mayor, menor)
+		PROMEDIO := SUMA / 4
+		TOTALCURSO += PROMEDIO
+		fmt.Println("ESTUDIANTE", i+1, "PROMEDIO:", PROMEDIO, "MAYOR NOTA:", MAYORNOTA, "MENOR NOTA:", MENORNOTA)
 	}
 
-	promedioGeneral /= 6
-	fmt.Printf("\nPromedio general de la clase: %.2f\n", promedioGeneral)
+	fmt.Println()
+	fmt.Println("PROMEDIO GENERAL:", TOTALCURSO/6)
 }
